@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
 gem "httparty"
+gem "nokogiri"
+gem "robotex"
 
 ruby '~> 2.7.0'
