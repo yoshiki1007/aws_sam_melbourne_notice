@@ -9,3 +9,7 @@ sam build --use-container
 ```zsh
 sam local invoke HelloWorldFunction --event events/event.json
 ```
+
+```zsh
+sam deploy --guided
+```
