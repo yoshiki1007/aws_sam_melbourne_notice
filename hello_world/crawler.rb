@@ -1,7 +1,6 @@
 require 'open-uri'
 require "nokogiri"
 require "robotex"
-require "pry"
 
 URLS = {
   nichigo_press: {
@@ -28,7 +27,7 @@ class Crawler
 
         yesterday_post_counts = created_dates.select do |created_date|
           # Date.parse(created_date.child) == Date.today - 1 # 昨日の投稿なら true
-          Date.parse(created_date.child) # テスト
+          Date.parse(created_date.child) == Date.today # テスト
         end.count
 
         next if yesterday_post_counts == 0 # 投稿が0件なら next
