@@ -3,13 +3,13 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   melbourne_rent_crawler
 
-  Sample SAM Template for melbourne_rent_crawler
+  Rent Information
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
-    MemorySize: 128
+    Timeout: 300
+    MemorySize: 256
 
 Resources:
   HelloWorldFunction:
@@ -20,6 +20,11 @@ Resources:
       Runtime: ruby2.7
       Architectures:
         - arm64
+      Events:
+        MelbourneWeatherEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 21 * * ? *)
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
