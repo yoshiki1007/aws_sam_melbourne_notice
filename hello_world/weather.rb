@@ -2,6 +2,16 @@ require 'json'
 require 'uri'
 require 'net/https'
 
+AREAS = {
+  city: {
+    lat: "-37.8165137",
+    lon: "144.9497845",
+    units: "metric",
+    lang: "ja",
+    exclude: "minutely"
+  }
+}
+
 class Weather
   attr_accessor :lat, :lon, :units, :lang, :exclude
 
@@ -11,6 +21,10 @@ class Weather
     @units = units
     @lang = lang
     @exclude = exclude
+  end
+
+  def city_new
+    Weather.new(lat: AREAS[:city][:lat], lon: AREAS[:city][:lon], units: AREAS[:city][:units], lang: AREAS[:city][:lang], exclude: AREAS[:city][:exclude])
   end
 
   def get_weather
