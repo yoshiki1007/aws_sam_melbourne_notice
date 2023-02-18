@@ -61,8 +61,8 @@ class OfficialLine
       inner_title = "おそらく常に掲載があるサイト\n\n"
 
       inner_body = NOT_CRAWLING_URLS.map do |not_crawling_url|
-        inner_site_name = "サイト名: #{not_crawling_url[:site_name]}\n"
-        inner_body = "URL: #{not_crawling_url[:url]}\n\n"
+        inner_site_name = "サイト名: " + not_crawling_url[:site_name] + "\n"
+        inner_body = "URL: " + not_crawling_url[:url] + "\n\n"
 
         inner_site_name + inner_body
       end.join
