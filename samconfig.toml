@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "melbourne-rent-crawler"
+stack_name = "melbourne-notice"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1rsm2df40tt41"
-s3_prefix = "melbourne-rent-crawler"
+s3_prefix = "melbourne-notice"
 region = "ap-northeast-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
