@@ -21,3 +21,7 @@ sam deploy --guided
 ```zsh
 sam deploy
 ```
+
+```zsh
+sam build --use-container && sam deploy 
+```
