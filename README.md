@@ -2,8 +2,6 @@
 
 URL: https://lin.ee/DmK81lc
 
-![line_oa_chat_230122_234024_group_0](https://user-images.githubusercontent.com/56143537/213916367-f27f5753-b03e-4ed8-84ea-242aa19e1e41.png)
-
 ## 概要
 
 毎朝8時（日本時間10時）に
