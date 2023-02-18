@@ -15,7 +15,7 @@ NOT_CRAWLING_URLS = {
 
 class OfficialLine
   class << self
-    def line_send(all_yesterday_posts)
+    def send_yesterday_posts(all_yesterday_posts)
       return if all_yesterday_posts.empty? # 全てのサイトで投稿がなければ return
 
       uri = URI.parse('https://api.line.me/v2/bot/message/broadcast')
