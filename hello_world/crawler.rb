@@ -20,17 +20,6 @@ URLS = {
   },
 }
 
-NOT_CRAWLING_URLS = {
-  gumtree: {
-    site_name: "Gumtree",
-    url: "https://www.gumtree.com.au/s-flatshare-houseshare/melbourne/c18294l3001317",
-  },
-  flatmates: {
-    site_name: "Flatmates",
-    url: "https://flatmates.com.au/",
-  },
-}
-
 class Crawler
   class << self
     def get_yesterday_posts

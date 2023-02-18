@@ -2,6 +2,17 @@ require 'json'
 require 'uri'
 require 'net/https'
 
+NOT_CRAWLING_URLS = {
+  gumtree: {
+    site_name: "Gumtree",
+    url: "https://www.gumtree.com.au/s-flatshare-houseshare/melbourne/c18294l3001317",
+  },
+  flatmates: {
+    site_name: "Flatmates",
+    url: "https://flatmates.com.au/",
+  },
+}
+
 class OfficialLine
   class << self
     def line_send(all_yesterday_posts)
@@ -60,9 +71,9 @@ class OfficialLine
 
       inner_title = "おそらく常に掲載があるサイト\n\n"
 
-      inner_body = NOT_CRAWLING_URLS.map do |not_crawling_url|
-        inner_site_name = "サイト名: " + not_crawling_url[:site_name] + "\n"
-        inner_body = "URL: " + not_crawling_url[:url] + "\n\n"
+      inner_body = NOT_CRAWLING_URLS.map do |key, value|
+        inner_site_name = "サイト名: " + value[:site_name] + "\n"
+        inner_body = "URL: " + value[:url] + "\n\n"
 
         inner_site_name + inner_body
       end.join
