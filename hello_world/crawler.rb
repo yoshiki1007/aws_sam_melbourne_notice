@@ -2,6 +2,8 @@ require 'open-uri'
 require "nokogiri"
 require "robotex"
 
+require_relative 'website'
+
 class Crawler
   class << self
     def get_yesterday_posts

@@ -2,6 +2,8 @@ require 'json'
 require 'uri'
 require 'net/https'
 
+require_relative 'website'
+
 class OfficialLine
   class << self
     def send_yesterday_posts(all_yesterday_posts)
