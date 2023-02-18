@@ -24,7 +24,7 @@ class Weather
   def get_text(weather_body)
     target_name = "Melbourne Weather City $\n\n"
 
-    weather_date = Time.at(weather_body["current"]["dt"], in: "+11:00").strftime("%m/%d %A") + " 天気\n"
+    weather_date = "◆ " + Time.at(weather_body["current"]["dt"], in: "+11:00").strftime("%m/%d %A") + " 天気\n"
     weather = weather_body["daily"][0]["weather"][0]["main"] + ": " + weather_body["daily"][0]["weather"][0]["description"] + "\n"
     sunrise = "日の出: " + Time.at(weather_body["current"]["sunrise"], in: "+11:00").strftime("%H:%M") + "\n"
     sunset = "日没: " + Time.at(weather_body["current"]["sunset"], in: "+11:00").strftime("%H:%M") + "\n\n"
