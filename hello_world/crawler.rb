@@ -7,6 +7,11 @@ URLS = {
     site_name: "NICHIGO PRESS",
     url: 'https://nichigopress.jp/classified/accommo/?jsf=jet-engine:items&tax=classified-states:1659;classified-city:1673',
     target_element: ".elementor-element.elementor-widget.elementor-widget-jet-listing-grid .jet-listing-grid__items > .jet-listing-grid__item .jet-listing-dynamic-field__content:contains('作成日')"
+  },
+  dengon_net: {
+    site_name: "DENGON NET",
+    url: 'https://www.dengonnet.net/melbourne/classifieds/sharehouse/224%2C76',
+    target_element: ".view-content > .views-row .cls_date"
   }
 }
 
@@ -24,9 +29,13 @@ class Crawler
 
         created_dates = doc.css(value[:target_element])
 
+        # 昨日の投稿数を取得
         yesterday_post_counts = created_dates.select do |created_date|
-          # Date.parse(created_date.child) == Date.today - 1 # 昨日の投稿なら true
-          Date.parse(created_date.child) == Date.today # テスト
+          if value[:site_name] == URLS[:nichigo_press][:site_name]
+            Date.parse(created_date.child) == Date.today - 1
+          elsif value[:site_name] == URLS[:dengon_net][:site_name]
+            Date.strptime(created_date.child, "%m月%d日") == Date.today - 1
+          end
         end.count
 
         next if yesterday_post_counts == 0 # 投稿が0件なら next
