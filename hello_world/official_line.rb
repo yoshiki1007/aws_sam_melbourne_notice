@@ -52,8 +52,8 @@ class OfficialLine
 
       body = all_yesterday_posts.each_with_index.map do |yesterday_post, index|
         site_name = "サイト名: " + yesterday_post[:site_name] + "\n"
-        post_count = "新規投稿数: " + yesterday_post[:count].to_s + "\n"
-        url = "URL: " + yesterday_post[:url] + "\n"
+        post_count = "投稿数: " + yesterday_post[:count].to_s + "件\n"
+        url = "URL: " + yesterday_post[:url] + "\n\n"
 
         site_name + post_count + url
       end.join # 配列を結合して文字列へ変更
