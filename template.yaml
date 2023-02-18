@@ -1,8 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  melbourne_rent_crawler
+  melbourne_notice
 
+  Weather Information
   Rent Information
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
@@ -21,7 +22,7 @@ Resources:
       Architectures:
         - arm64
       Events:
-        MelbourneWeatherEvent:
+        MelbourneEvent:
           Type: Schedule
           Properties:
             Schedule: cron(0 21 * * ? *)
