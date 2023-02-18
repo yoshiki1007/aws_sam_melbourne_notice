@@ -23,8 +23,10 @@ class Weather
     @exclude = exclude
   end
 
-  def city_new
-    Weather.new(lat: AREAS[:city][:lat], lon: AREAS[:city][:lon], units: AREAS[:city][:units], lang: AREAS[:city][:lang], exclude: AREAS[:city][:exclude])
+  class << self
+    def city_new
+      Weather.new(lat: AREAS[:city][:lat], lon: AREAS[:city][:lon], units: AREAS[:city][:units], lang: AREAS[:city][:lang], exclude: AREAS[:city][:exclude])
+    end
   end
 
   def get_weather
