@@ -86,7 +86,7 @@ class OfficialLine
 
     def make_text(all_yesterday_posts)
       title = "Melbourne Rent Crawler $\n"
-      alert = "※注意喚起※ \nレント詐欺について: https://nichigopress.jp/notice-item/51181/\n\n"
+      alert = "レント詐欺について: https://nichigopress.jp/notice-item/51181/\n\n"
       sub_title = "◆ 昨日投稿されたレント情報\n\n"
 
       body = all_yesterday_posts.map do |yesterday_post|
