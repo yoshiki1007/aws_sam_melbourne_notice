@@ -58,7 +58,16 @@ class OfficialLine
         site_name + post_count + url
       end.join # 配列を結合して文字列へ変更
 
-      title + sub_title + body
+      inner_title = "おそらく常に掲載があるサイト\n\n"
+
+      inner_body = NOT_CRAWLING_URLS.map do |not_crawling_url|
+        inner_site_name = "サイト名: #{not_crawling_url[:site_name]}\n"
+        inner_body = "URL: #{not_crawling_url[:url]}\n\n"
+
+        inner_site_name + inner_body
+      end.join
+
+      title + sub_title + body + inner_title + inner_body
     end
   end
 end
