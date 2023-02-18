@@ -27,7 +27,7 @@ class OfficialLine
               {
                 "index": 23,
                 "productId": "5ac21184040ab15980c9b43a",
-                "emojiId": "024"
+                "emojiId": "102"
               }
             ]
           }
