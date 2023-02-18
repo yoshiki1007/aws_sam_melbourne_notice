@@ -59,7 +59,8 @@ class OfficialLine
 
     def make_text(all_yesterday_posts)
       title = "Melbourne Rent Crawler $\n"
-      sub_title = "昨日投稿されたレント情報\n\n"
+      alert = "※注意喚起※\nレント詐欺について: https://nichigopress.jp/notice-item/51181/\n\n"
+      sub_title = "◆ 昨日投稿されたレント情報\n\n"
 
       body = all_yesterday_posts.each_with_index.map do |yesterday_post, index|
         site_name = "サイト名: " + yesterday_post[:site_name] + "\n"
@@ -69,16 +70,20 @@ class OfficialLine
         site_name + post_count + url
       end.join # 配列を結合して文字列へ変更
 
-      inner_title = "おそらく常に掲載があるサイト\n\n"
+      inner_title = "◆ 常に掲載があるサイト\n\n"
 
-      inner_body = NOT_CRAWLING_URLS.map do |key, value|
+      inner_body = NOT_CRAWLING_URLS.each_with_index.map do |(key, value), index|
         inner_site_name = "サイト名: " + value[:site_name] + "\n"
-        inner_body = "URL: " + value[:url] + "\n\n"
+        inner_body = if NOT_CRAWLING_URLS.count - 1 == index
+                       "URL: " + value[:url] + "\n"
+                     else
+                       "URL: " + value[:url] + "\n\n"
+                     end
 
         inner_site_name + inner_body
       end.join
 
-      title + sub_title + body + inner_title + inner_body
+      title + alert + sub_title + body + inner_title + inner_body
     end
   end
 end
