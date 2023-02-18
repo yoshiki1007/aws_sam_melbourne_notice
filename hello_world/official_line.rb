@@ -2,17 +2,6 @@ require 'json'
 require 'uri'
 require 'net/https'
 
-NOT_CRAWLING_URLS = {
-  gumtree: {
-    site_name: "Gumtree",
-    url: "https://www.gumtree.com.au/s-flatshare-houseshare/melbourne/c18294l3001317",
-  },
-  flatmates: {
-    site_name: "Flatmates",
-    url: "https://flatmates.com.au/",
-  },
-}
-
 class OfficialLine
   class << self
     def send_yesterday_posts(all_yesterday_posts)
@@ -27,13 +16,13 @@ class OfficialLine
       req['Content-type'] = ENV['CONTENT_TYPE']
       req["Authorization"] = ENV['LINE_CHANNEL_ACCESS_TOKEN']
 
-      result = make_text(all_yesterday_posts)
+      text = make_text(all_yesterday_posts)
 
       body = {
         "messages": [
           {
             "type" => "text",
-            "text" => result,
+            "text" => text,
             "emojis" => [
               {
                 "index": 23,
@@ -62,7 +51,7 @@ class OfficialLine
       alert = "※注意喚起※ \nレント詐欺について: https://nichigopress.jp/notice-item/51181/\n\n"
       sub_title = "◆ 昨日投稿されたレント情報\n\n"
 
-      body = all_yesterday_posts.each_with_index.map do |yesterday_post, index|
+      body = all_yesterday_posts.map do |yesterday_post|
         site_name = "サイト名: " + yesterday_post[:site_name] + "\n"
         post_count = "投稿数: " + yesterday_post[:count].to_s + "件\n"
         url = "URL: " + yesterday_post[:url] + "\n\n"
@@ -72,12 +61,14 @@ class OfficialLine
 
       inner_title = "◆ 常に掲載があるサイト\n\n"
 
-      inner_body = NOT_CRAWLING_URLS.each_with_index.map do |(key, value), index|
-        inner_site_name = "サイト名: " + value[:site_name] + "\n"
-        inner_body = if NOT_CRAWLING_URLS.count - 1 == index
-                       "URL: " + value[:url] + "\n"
+      not_crawling_websites = Website.all_new.reject { |w| w.crawling? }
+      inner_body = not_crawling_websites.each_with_index.map do |not_crawling_website, index|
+        inner_site_name = "サイト名: " + not_crawling_website.display_name + "\n"
+
+        inner_body = if not_crawling_websites.count - 1 == index
+                       "URL: " + not_crawling_website.url + "\n"
                      else
-                       "URL: " + value[:url] + "\n\n"
+                       "URL: " + not_crawling_website.url + "\n\n"
                      end
 
         inner_site_name + inner_body
