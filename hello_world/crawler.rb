@@ -47,16 +47,17 @@ class Crawler
       end.join # 配列を結合して文字列へ変更
 
       not_crawling_websites = websites.reject { |w| w.crawling? }
-      inner_body = not_crawling_websites.each_with_index.map do |not_crawling_website, i|
+      inner_body = not_crawling_websites.each_with_index(1).map do |not_crawling_website, i|
         <<~"EOS"
           サイト名: #{not_crawling_website.display_name}
-          URL: #{not_crawling_website.url}#{"\n" if not_crawling_websites.count - 1 == i}
+          URL: #{not_crawling_website.url}#{not_crawling_websites.count == i ? "" : "\n" }
         EOS
       end.join
 
       <<~"EOS"
         Melbourne Rent Crawler $
         レント詐欺について: #{ALERT_URL}
+
         ◆ 昨日投稿されたレント情報
 
         #{body}
