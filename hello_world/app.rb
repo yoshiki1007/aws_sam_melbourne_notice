@@ -6,7 +6,7 @@ def lambda_handler(event:, context:)
   # 天気 City
   weather = Weather.city_new
   weather_body = weather.get_weather
-  weather_text = weather.get_text(weather_body)
+  weather_text = weather.make_text(weather_body)
   OfficialLine.send_weather(weather_text)
 
   # レント クローラー
