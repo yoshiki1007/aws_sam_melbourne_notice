@@ -27,8 +27,6 @@ class Crawler
           end
         end.count
 
-        next if yesterday_post_counts == 0 # 投稿が0件なら next
-
         {
           site_name: website.display_name,
           url: website.url,
@@ -36,6 +34,10 @@ class Crawler
         }
 
       end.compact # nilを削除
+    end
+
+    def make_text(all_yesterday_posts)
+
     end
   end
 end
