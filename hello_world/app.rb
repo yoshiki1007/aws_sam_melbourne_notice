@@ -13,5 +13,6 @@ def lambda_handler(event:, context:)
   # レント クローラー
   websites = Website.all_new
   all_yesterday_posts = Crawler.get_yesterday_posts(websites)
-  OfficialLine.send_yesterday_posts(all_yesterday_posts)
+  crawler_text = Crawler.make_text(websites, all_yesterday_posts)
+  OfficialLine.send_yesterday_posts(crawler_text)
 end
