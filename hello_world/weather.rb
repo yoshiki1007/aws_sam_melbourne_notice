@@ -37,20 +37,21 @@ class Weather
     JSON.parse(res.body)
   end
 
-  def get_text(weather_body)
-    target_name = "Melbourne Weather City $\n\n"
+  def make_text(weather_body)
+    <<~"EOS"
+      Melbourne Weather City $
+      
+      ◆ #{Time.at(weather_body["current"]["dt"], in: "+11:00").strftime("%m/%d %A")} 天気
+      #{weather_body["daily"][0]["weather"][0]["main"]}: #{weather_body["daily"][0]["weather"][0]["description"]}
+      日の出: #{Time.at(weather_body["current"]["sunrise"], in: "+11:00").strftime("%H:%M")}
+      日没: #{Time.at(weather_body["current"]["sunset"], in: "+11:00").strftime("%H:%M")}
 
-    weather_date = "◆ " + Time.at(weather_body["current"]["dt"], in: "+11:00").strftime("%m/%d %A") + " 天気\n"
-    weather = weather_body["daily"][0]["weather"][0]["main"] + ": " + weather_body["daily"][0]["weather"][0]["description"] + "\n"
-    sunrise = "日の出: " + Time.at(weather_body["current"]["sunrise"], in: "+11:00").strftime("%H:%M") + "\n"
-    sunset = "日没: " + Time.at(weather_body["current"]["sunset"], in: "+11:00").strftime("%H:%M") + "\n\n"
-    temp_max = "最高気温: " + weather_body["daily"][0]["temp"]["max"].floor.to_s + "℃\n"
-    temp_min = "最低気温: " + weather_body["daily"][0]["temp"]["min"].floor.to_s + "℃\n"
-    temp_morn = "朝の気温: " + weather_body["daily"][0]["temp"]["morn"].floor.to_s + "℃\n"
-    temp_day = "日中の気温: " + weather_body["daily"][0]["temp"]["day"].floor.to_s + "℃\n"
-    temp_eve = "夕方の気温: " + weather_body["daily"][0]["temp"]["eve"].floor.to_s + "℃\n"
-    temp_night = "夜の気温: " + weather_body["daily"][0]["temp"]["night"].floor.to_s + "℃"
-
-    target_name + weather_date + weather + sunrise + sunset + temp_max + temp_min + temp_morn + temp_day + temp_eve + temp_night
+      最高気温: #{weather_body["daily"][0]["temp"]["max"].floor.to_s}℃
+      最低気温: #{weather_body["daily"][0]["temp"]["min"].floor.to_s}℃
+      朝の気温: #{weather_body["daily"][0]["temp"]["morn"].floor.to_s}℃
+      日中の気温: #{weather_body["daily"][0]["temp"]["day"].floor.to_s}℃
+      夕方の気温: #{weather_body["daily"][0]["temp"]["eve"].floor.to_s}℃
+      夜の気温: #{weather_body["daily"][0]["temp"]["night"].floor.to_s}℃
+    EOS
   end
 end
