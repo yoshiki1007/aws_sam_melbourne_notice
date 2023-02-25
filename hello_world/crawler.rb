@@ -2,14 +2,12 @@ require 'open-uri'
 require "nokogiri"
 require "robotex"
 
-require_relative 'website'
-
 class Crawler
   class << self
-    def get_yesterday_posts
+    def get_yesterday_posts(websites)
       robotex = Robotex.new
 
-      Website.all_new.map do |website|
+      websites.map do |website|
         next unless website.crawling? # クローラーの対象でなければ next
 
         next unless robotex.allowed?(website.url) # クローラーを許可していなければ next
