@@ -1,6 +1,10 @@
 # Melbourne Notice - 公式ライン
 
-URL: https://lin.ee/DmK81lc
+
+https://user-images.githubusercontent.com/56143537/224471605-3ad72ee4-3cf3-4e40-905b-b9eab6fc1132.mp4
+
+
+友達追加URL: https://lin.ee/DmK81lc
 
 ## 概要
 
